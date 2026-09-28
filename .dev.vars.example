@@ -1,0 +1,13 @@
+# Copy this file to `.dev.vars` (NOT `.env.local`) at the project root.
+#
+# Why: every API route reads secrets via getRequestContext().env (a Cloudflare
+# binding), not process.env. Only `.dev.vars` is loaded into that binding
+# object by @cloudflare/next-on-pages' local dev platform shim. `.env.local`
+# is ignored by this app entirely.
+#
+# `.dev.vars` is gitignored — never commit real secrets.
+
+AUTH_SECRET=replace_with_openssl_rand_base64_32_output
+LINKEDIN_CLIENT_ID=your-linkedin-client-id
+LINKEDIN_CLIENT_SECRET=your-linkedin-client-secret
+OPENAI_API_KEY=sk-replace-with-your-key

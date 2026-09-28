@@ -1,0 +1,40 @@
+{
+  "name": "sambungla-edge",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 8788",
+    "build": "next build",
+    "pages:build": "npx @cloudflare/next-on-pages",
+    "preview": "npm run pages:build && wrangler pages dev .vercel/output/static --compatibility-date=2024-09-23 --compatibility-flag=nodejs_compat",
+    "deploy": "npm run pages:build && wrangler pages deploy .vercel/output/static",
+    "db:init": "wrangler d1 execute sambungla-db --local --file=./schema.sql",
+    "db:init:remote": "wrangler d1 execute sambungla-db --remote --file=./schema.sql",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "14.2.5",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "next-auth": "5.0.0-beta.32",
+    "@auth/d1-adapter": "1.11.1",
+    "openai": "4.55.4",
+    "zod": "3.23.8",
+    "nanoid": "5.0.7",
+    "clsx": "2.1.1"
+  },
+  "devDependencies": {
+    "@cloudflare/next-on-pages": "1.13.5",
+    "@cloudflare/workers-types": "4.20240909.0",
+    "wrangler": "3.72.0",
+    "typescript": "5.5.4",
+    "@types/node": "20.14.15",
+    "@types/react": "18.3.3",
+    "@types/react-dom": "18.3.0",
+    "tailwindcss": "3.4.9",
+    "postcss": "8.4.41",
+    "autoprefixer": "10.4.20",
+    "eslint": "8.57.0",
+    "eslint-config-next": "14.2.5"
+  }
+}
