@@ -82,7 +82,7 @@ export default function PublishPage() {
         >
           {copyLabel}
         </button>
-        
+        <a
           href="https://www.linkedin.com/feed/"
           target="_blank"
           rel="noopener noreferrer"
