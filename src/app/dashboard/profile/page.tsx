@@ -34,7 +34,7 @@ export default function ProfilePage() {
     async function loadStyle() {
       try {
         const response = await fetch("/api/style/samples");
-        if (response.ok) setStyleData(await response.json());
+        if (response.ok) setStyleData((await response.json()) as StyleData);
       } catch {
         // Non-critical — the rest of the profile page still works.
       }
