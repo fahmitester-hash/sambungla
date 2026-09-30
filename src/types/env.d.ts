@@ -1,15 +1,17 @@
 /// <reference types="@cloudflare/workers-types" />
 
-export type CloudflareEnv = {
-  DB: D1Database;
-  KV_CACHE: KVNamespace;
-  LINKEDIN_CLIENT_ID: string;
-  LINKEDIN_CLIENT_SECRET: string;
-  AUTH_SECRET: string;
-  OPENAI_API_KEY: string;
-  NEXTAUTH_URL: string;
-  APP_ENV: string;
-};
+declare global {
+  interface CloudflareEnv {
+    DB: D1Database;
+    KV_CACHE: KVNamespace;
+    LINKEDIN_CLIENT_ID: string;
+    LINKEDIN_CLIENT_SECRET: string;
+    AUTH_SECRET: string;
+    OPENAI_API_KEY: string;
+    NEXTAUTH_URL: string;
+    APP_ENV: string;
+  }
+}
 
 declare module "next-auth" {
   interface Session {
@@ -21,3 +23,5 @@ declare module "next-auth" {
     };
   }
 }
+
+export {};
