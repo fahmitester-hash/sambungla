@@ -1,7 +1,6 @@
 import { auth } from "@/auth";
 import { getRequestContext } from "@cloudflare/next-on-pages";
 import { z } from "zod";
-import type { CloudflareEnv } from "@/types/env";
 
 export const runtime = "edge";
 
@@ -33,7 +32,7 @@ export async function PATCH(
     });
   }
 
-  const { env } = getRequestContext<CloudflareEnv>();
+  const { env } = getRequestContext();
 
   const pendingSchedule = await env.DB.prepare(
     `SELECT scheduledFor FROM scheduling_queue WHERE postId = ?1 AND status = 'pending' LIMIT 1`
@@ -81,7 +80,7 @@ export async function GET(
     return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401 });
   }
 
-  const { env } = getRequestContext<CloudflareEnv>();
+  const { env } = getRequestContext();
 
   const post = await env.DB.prepare(
     `SELECT generatedContent FROM posts WHERE id = ?1 AND userId = ?2 LIMIT 1`
