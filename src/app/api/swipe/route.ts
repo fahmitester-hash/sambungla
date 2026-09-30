@@ -2,7 +2,6 @@ import { auth } from "@/auth";
 import { getRequestContext } from "@cloudflare/next-on-pages";
 import { nanoid } from "nanoid";
 import { z } from "zod";
-import type { CloudflareEnv } from "@/types/env";
 
 export const runtime = "edge";
 
@@ -18,7 +17,7 @@ export async function GET(): Promise<Response> {
     return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401 });
   }
 
-  const { env } = getRequestContext<CloudflareEnv>();
+  const { env } = getRequestContext();
 
   const entries = await env.DB.prepare(
     `SELECT id, content, note, source, createdAt FROM swipe_file
@@ -48,7 +47,7 @@ export async function POST(request: Request): Promise<Response> {
     });
   }
 
-  const { env } = getRequestContext<CloudflareEnv>();
+  const { env } = getRequestContext();
   const id = nanoid();
 
   await env.DB.prepare(
