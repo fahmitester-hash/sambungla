@@ -2,6 +2,8 @@ import { redirect } from "next/navigation";
 import { auth } from "@/auth";
 import DashboardShell from "@/components/dashboard-shell";
 
+export const runtime = "edge";
+
 export default async function DashboardLayout({
   children,
 }: {
