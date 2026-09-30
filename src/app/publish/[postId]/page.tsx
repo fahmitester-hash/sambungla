@@ -21,7 +21,7 @@ export default function PublishPage() {
       try {
         const response = await fetch(`/api/posts/${params.postId}`);
         if (!response.ok) throw new Error("Not found");
-        const data = await response.json();
+        const data = (await response.json()) as PostData;
         if (!cancelled) setPost(data);
       } catch {
         if (!cancelled) setLoadError("Couldn't load this post.");
