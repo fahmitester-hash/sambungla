@@ -91,7 +91,7 @@ function DashboardPageInner() {
       });
 
       if (!response.ok || !response.body) {
-        const errJson = await response.json().catch(() => null);
+        const errJson = (await response.json().catch(() => null)) as { error?: string } | null;
         setErrorMessage(errJson?.error ?? "Something went wrong generating your post.");
         setGenState("error");
         return;
@@ -166,7 +166,7 @@ function DashboardPageInner() {
         setOutputText(editableText);
         setIsEditing(false);
       } else {
-        const errJson = await response.json().catch(() => null);
+        const errJson = (await response.json().catch(() => null)) as { error?: string } | null;
         setErrorMessage(errJson?.error ?? "Couldn't save your edits. Please try again.");
       }
     } finally {
