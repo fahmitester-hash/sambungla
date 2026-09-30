@@ -65,7 +65,7 @@ export default function ProfilePage() {
       if (response.ok) {
         setDraftSamples([]);
         const refreshed = await fetch("/api/style/samples");
-        if (refreshed.ok) setStyleData(await refreshed.json());
+        if (refreshed.ok) setStyleData((await refreshed.json()) as StyleData);
       }
     } finally {
       setAnalyzing(false);
@@ -79,7 +79,7 @@ export default function ProfilePage() {
       try {
         const response = await fetch("/api/profile");
         if (!response.ok) throw new Error("Failed to load profile");
-        const data = await response.json();
+        const data = (await response.json()) as Partial<ProfileData>;
         if (!cancelled) {
           setProfile({
             industry: data.industry ?? "",
