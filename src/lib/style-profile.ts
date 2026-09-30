@@ -1,5 +1,4 @@
 import OpenAI from "openai";
-import type { CloudflareEnv } from "@/types/env";
 
 const MIN_SAMPLES_FOR_PROFILE = 3;
 const MAX_SAMPLES_IN_PROMPT = 12;
