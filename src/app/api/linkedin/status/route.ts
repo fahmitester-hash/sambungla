@@ -1,6 +1,5 @@
 import { auth } from "@/auth";
 import { getRequestContext } from "@cloudflare/next-on-pages";
-import type { CloudflareEnv } from "@/types/env";
 
 export const runtime = "edge";
 
@@ -16,7 +15,7 @@ export async function GET(): Promise<Response> {
     return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401 });
   }
 
-  const { env } = getRequestContext<CloudflareEnv>();
+  const { env } = getRequestContext();
 
   const row = await env.DB.prepare(
     `SELECT expires_at FROM accounts WHERE userId = ?1 AND provider = 'linkedin' LIMIT 1`
