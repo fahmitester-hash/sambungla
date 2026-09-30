@@ -2,7 +2,6 @@ import { auth } from "@/auth";
 import { getRequestContext } from "@cloudflare/next-on-pages";
 import { nanoid } from "nanoid";
 import { z } from "zod";
-import type { CloudflareEnv } from "@/types/env";
 
 export const runtime = "edge";
 
@@ -27,7 +26,7 @@ export async function POST(request: Request): Promise<Response> {
     });
   }
 
-  const { env } = getRequestContext<CloudflareEnv>();
+  const { env } = getRequestContext();
 
   const post = await env.DB.prepare(
     `SELECT id FROM posts WHERE id = ?1 AND userId = ?2 LIMIT 1`
