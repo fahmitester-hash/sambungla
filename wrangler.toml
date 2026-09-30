@@ -10,7 +10,7 @@ database_id = "REPLACE_WITH_YOUR_D1_DATABASE_ID"
 
 [[kv_namespaces]]
 binding = "KV_CACHE"
-id = "REPLACE_WITH_YOUR_KV_NAMESPACE_ID"
+id = "3d4c6db63bb9485ba2d582477be71af8"
 
 [vars]
 NEXTAUTH_URL = "http://localhost:8788"
