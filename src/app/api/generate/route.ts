@@ -3,7 +3,6 @@ import { getRequestContext } from "@cloudflare/next-on-pages";
 import { nanoid } from "nanoid";
 import OpenAI from "openai";
 import { z } from "zod";
-import type { CloudflareEnv } from "@/types/env";
 
 export const runtime = "edge";
 
@@ -76,7 +75,7 @@ export async function POST(request: Request): Promise<Response> {
 
   const { rawPrompt, tone } = parsedBody;
 
-  const { env, ctx } = getRequestContext<CloudflareEnv>();
+  const { env, ctx } = getRequestContext();
 
   const openai = new OpenAI({ apiKey: env.OPENAI_API_KEY });
   const systemPrompt = buildSystemPrompt(tone);
