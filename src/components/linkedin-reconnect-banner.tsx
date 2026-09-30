@@ -18,7 +18,7 @@ export default function LinkedInReconnectBanner() {
       try {
         const response = await fetch("/api/linkedin/status");
         if (!response.ok) return;
-        const data: StatusResponse = await response.json();
+        const data = (await response.json()) as StatusResponse;
         if (!cancelled) setStatus(data);
       } catch {
         // Silent — banner just won't show if the check itself fails.
