@@ -34,7 +34,7 @@ export default function InspirationPage() {
     try {
       const response = await fetch("/api/swipe");
       if (response.ok) {
-        const data = await response.json();
+        const data = (await response.json()) as { entries?: SwipeEntry[] };
         setSwipeEntries(data.entries ?? []);
       }
     } finally {
