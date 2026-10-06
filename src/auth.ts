@@ -1,35 +1,16 @@
 import NextAuth from "next-auth";
-import LinkedIn from "next-auth/providers/linkedin";
 import { D1Adapter } from "@auth/d1-adapter";
 import { getRequestContext } from "@cloudflare/next-on-pages";
 import { nanoid } from "nanoid";
+import buildAuthConfig from "@/auth.config";
 
 export const { handlers, auth, signIn, signOut } = NextAuth(() => {
   const { env } = getRequestContext();
+  const base = buildAuthConfig();
 
   return {
+    ...base,
     adapter: D1Adapter(env.DB),
-    providers: [
-      LinkedIn({
-        clientId: env.LINKEDIN_CLIENT_ID,
-        clientSecret: env.LINKEDIN_CLIENT_SECRET,
-        authorization: {
-          params: {
-            scope: "openid profile email w_member_social",
-          },
-        },
-      }),
-    ],
-    session: {
-      strategy: "database",
-      maxAge: 30 * 24 * 60 * 60,
-    },
-    secret: env.AUTH_SECRET,
-    trustHost: true,
-    pages: {
-      signIn: "/login",
-      error: "/login",
-    },
     events: {
       async createUser({ user }) {
         if (!user.id) return;
@@ -57,14 +38,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth(() => {
             user.id
           )
           .run();
-      },
-    },
-    callbacks: {
-      async session({ session, user }) {
-        if (session.user) {
-          session.user.id = user.id;
-        }
-        return session;
       },
     },
   };
