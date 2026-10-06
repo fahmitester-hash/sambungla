@@ -13,7 +13,7 @@ binding = "KV_CACHE"
 id = "3d4c6db63bb9485ba2d582477be71af8"
 
 [vars]
-NEXTAUTH_URL = "http://localhost:8788"
+NEXTAUTH_URL = "sambungla.pages.dev"
 APP_ENV = "development"
 
 # Secrets (set via `wrangler pages secret put`, never committed):
