@@ -1,5 +1,11 @@
-import { auth } from "@/auth";
+import NextAuth from "next-auth";
 import { NextResponse } from "next/server";
+import buildAuthConfig from "@/auth.config";
+
+// Deliberately built from the lightweight edge-safe config here, not the
+// full "@/auth" (which pulls in the D1 adapter). Middleware only needs to
+// check a signed JWT cookie, never the database.
+const { auth } = NextAuth(buildAuthConfig);
 
 export default auth((req) => {
   const isLoggedIn = !!req.auth;
