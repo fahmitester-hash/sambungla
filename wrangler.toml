@@ -6,7 +6,7 @@ pages_build_output_dir = ".vercel/output/static"
 [[d1_databases]]
 binding = "DB"
 database_name = "sambungla-db"
-database_id = "REPLACE_WITH_YOUR_D1_DATABASE_ID"
+database_id = "8a5b519b-1da4-42cc-913f-f0f183d34904"
 
 [[kv_namespaces]]
 binding = "KV_CACHE"
